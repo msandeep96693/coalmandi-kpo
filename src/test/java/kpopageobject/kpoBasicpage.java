@@ -1,5 +1,5 @@
 
-package pageobject;
+package kpopageobject;
 
 import java.time.Duration;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import Utilities.waitHelper;
 
 
-public class Basicpage 
+public class kpoBasicpage 
 {
 	waitHelper wait;
 	WebDriver driver;
 
 
-	Basicpage(WebDriver driver)
+	public kpoBasicpage(WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);

@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="TextExecution.SigninExecutionclass"/>
+      <class name="customerTestcaseExecution.SigninExecutionclass"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
