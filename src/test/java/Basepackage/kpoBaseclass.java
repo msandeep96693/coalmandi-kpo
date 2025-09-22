@@ -22,6 +22,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import kpopageobject.kpocreateteammanagementpage;
 import kpopageobject.kposigninpage;
 
 
@@ -33,6 +34,7 @@ public class kpoBaseclass {
 	
 	// ops 
 	public kposigninpage opssign;
+	public kpocreateteammanagementpage kpoteam;
 	
 	
 	public kpoBaseclass() { 
