@@ -8,10 +8,10 @@ import kpopageobject.kposigninpage;
 public class kposigninExecustionclass extends kpoBaseclass {
 	
 	@Test
-	public void opssignin()
+	public void kposignin() throws InterruptedException
 	{
 		opssign = new kposigninpage(driver);
-		opssign.kposigninpage(prop.getProperty("opsemail"), prop.getProperty("password"));
+		opssign.kposigninpage(prop.getProperty("kpoemail"), prop.getProperty("password"));
 	}
 
 }

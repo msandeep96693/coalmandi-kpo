@@ -25,7 +25,7 @@ public class kposigninpage extends kpoBasicpage {
 	@FindBy(xpath="(//button[@type='submit'])[1]") 
 	private WebElement btnLogin;
 	
-	public void kposigninpage(String email, String pwd)
+	public void kposigninpage(String email, String pwd) throws InterruptedException
 	{
 		// enter a emailID
 		waitforElement(emailFieldLocator);
@@ -38,5 +38,7 @@ public class kposigninpage extends kpoBasicpage {
 		// click on signin button
 		waitforElement(btnLogin);
 		javascriptclick(btnLogin);
+		
+		Thread.sleep(2000);
 	}
 }
