@@ -25,6 +25,9 @@ public class kposigninpage extends kpoBasicpage {
 	@FindBy(xpath="(//button[@type='submit'])[1]") 
 	private WebElement btnLogin;
 	
+	@FindBy(xpath = "//div[@class='ant-notification-notice-message']")
+	private WebElement confirmationsuccessmessage;
+	
 	public void kposigninpage(String email, String pwd) throws InterruptedException
 	{
 		// enter a emailID
@@ -38,6 +41,10 @@ public class kposigninpage extends kpoBasicpage {
 		// click on signin button
 		waitforElement(btnLogin);
 		javascriptclick(btnLogin);
+		
+		waitforElement(confirmationsuccessmessage);
+		String confirmationmsg = confirmationsuccessmessage.getText();
+		System.out.println("Login confirmation message :- "+ confirmationmsg);
 		
 		Thread.sleep(2000);
 	}

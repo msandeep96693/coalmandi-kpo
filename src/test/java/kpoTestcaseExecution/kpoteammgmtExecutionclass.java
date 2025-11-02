@@ -8,7 +8,16 @@ import kpopageobject.kposigninpage;
 
 public class kpoteammgmtExecutionclass extends kpoBaseclass {
 	
-		@Test(priority = 0, enabled = false)
+	
+	    @Test(priority = 0, enabled = true)
+	    public void kpoteammanagementlistpage() throws InterruptedException
+	    {
+	    	kpoteam = new kpocreateteammanagementpage(driver);
+	    	kpoteam.kpoteammanagementlistpage(prop.getProperty("kpoemail"), prop.getProperty("password"),
+	    			prop.getProperty("sidebarteamname"), prop.getProperty("searchbyname"), prop.getProperty("statusname"));
+	    }
+	
+		@Test(priority = 1, enabled = false)
 		public void kpocreateteammanagement() throws InterruptedException
 		{
 			kpoteam = new kpocreateteammanagementpage(driver);
@@ -19,13 +28,13 @@ public class kpoteammgmtExecutionclass extends kpoBaseclass {
 		}
 		
 		
-		@Test(priority = 1, enabled = true)
+		@Test(priority = 2, enabled = false)
 		public void kpoupdateteammanagement() throws InterruptedException
 		{
 			kpoteam = new kpocreateteammanagementpage(driver);
 			kpoteam.updateteammember(prop.getProperty("kpoemail"), prop.getProperty("password"), 
 					prop.getProperty("sidebarteamname"), prop.getProperty("updatefullname"), 
-					prop.getProperty("updateemailID"), prop.getProperty("updatephonenumber"));
+					prop.getProperty("updatephonenumber"));
 		}
 
 }

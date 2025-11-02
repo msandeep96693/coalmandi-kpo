@@ -92,6 +92,24 @@ public class kpoBasicpage
 		js.executeScript("arguments[0].click();", element );
 	}
 	
+	public void selectDropdownOption(List<WebElement> dropdownOptions, String optionName) throws InterruptedException {
+	    boolean found = false;
+
+	    for (WebElement option : dropdownOptions) {
+	    	Thread.sleep(2000);
+	    	System.out.println("option name :- "+ option.getText());
+	    	
+	        if (option.getText().equalsIgnoreCase(optionName)) {
+	            javascriptclick(option);
+	            found = true;
+	            break;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("Option not found: " + optionName);
+	    }
+	}
 	
 	// --------------------------------------------------------------------------------
 	

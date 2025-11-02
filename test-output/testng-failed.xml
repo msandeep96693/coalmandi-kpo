@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="kpoTestcaseExecution.kposigninExecustionclass">
+      <class name="kpoTestcaseExecution.kpovendorcoordinationExecutionclass">
         <methods>
           <include name="tear"/>
-          <include name="opssignin"/>
+          <include name="kpovendorcoordinationlistpage"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- kpoTestcaseExecution.kposigninExecustionclass -->
+      </class> <!-- kpoTestcaseExecution.kpovendorcoordinationExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
