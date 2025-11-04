@@ -2,31 +2,31 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-11-02T17:24:39 IST" name="Default suite" finished-at="2025-11-02T17:25:13 IST" duration-ms="34199">
+  <suite started-at="2025-11-04T22:06:14 IST" name="Default suite" finished-at="2025-11-04T22:06:54 IST" duration-ms="39438">
     <groups>
     </groups>
-    <test started-at="2025-11-02T17:24:39 IST" name="Default test" finished-at="2025-11-02T17:25:13 IST" duration-ms="34199">
-      <class name="kpoTestcaseExecution.kpovendorcoordinationExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:kpoTestcaseExecution.kpovendorcoordinationExecutionclass@43c1b556]" started-at="2025-11-02T17:24:39 IST" name="setup" finished-at="2025-11-02T17:24:51 IST" duration-ms="12253" status="PASS">
+    <test started-at="2025-11-04T22:06:14 IST" name="Default test" finished-at="2025-11-04T22:06:54 IST" duration-ms="39438">
+      <class name="kpoTestcaseExecution.kpocontractmanagementExecutionclass">
+        <test-method is-config="true" signature="setup()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@2de23121]" started-at="2025-11-04T22:06:14 IST" name="setup" finished-at="2025-11-04T22:06:44 IST" duration-ms="29144" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="kpovendorcoordinationlistpage()[pri:0, instance:kpoTestcaseExecution.kpovendorcoordinationExecutionclass@43c1b556]" started-at="2025-11-02T17:24:51 IST" name="kpovendorcoordinationlistpage" finished-at="2025-11-02T17:25:13 IST" duration-ms="21565" status="PASS">
+        <test-method signature="contractmanagementrequestshortcloseaction()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@2de23121]" started-at="2025-11-04T22:06:44 IST" name="contractmanagementrequestshortcloseaction" finished-at="2025-11-04T22:06:53 IST" duration-ms="9825" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- kpovendorcoordinationlistpage -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:kpoTestcaseExecution.kpovendorcoordinationExecutionclass@43c1b556]" started-at="2025-11-02T17:25:13 IST" name="tear" finished-at="2025-11-02T17:25:13 IST" duration-ms="299" status="PASS">
+        </test-method> <!-- contractmanagementrequestshortcloseaction -->
+        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@2de23121]" started-at="2025-11-04T22:06:53 IST" name="tear" finished-at="2025-11-04T22:06:54 IST" duration-ms="392" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=kpovendorcoordinationlistpage status=SUCCESS method=kpovendorcoordinationExecutionclass.kpovendorcoordinationlistpage()[pri:0, instance:kpoTestcaseExecution.kpovendorcoordinationExecutionclass@43c1b556] output={null}]]]>
+                <![CDATA[[TestResult name=contractmanagementrequestshortcloseaction status=SUCCESS method=kpocontractmanagementExecutionclass.contractmanagementrequestshortcloseaction()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@2de23121] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tear -->
-      </class> <!-- kpoTestcaseExecution.kpovendorcoordinationExecutionclass -->
+      </class> <!-- kpoTestcaseExecution.kpocontractmanagementExecutionclass -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

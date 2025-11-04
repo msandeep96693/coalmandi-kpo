@@ -1,12 +1,18 @@
 package kpopageobject;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.xml.xpath.XPath;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class kpocontractmanagementpage extends kpoBasicpage  {
@@ -30,6 +36,12 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//div[@class='space-y-4']")
 	private List<WebElement> contractlistdata;
 	
+	@FindBy(xpath = "(//div[@class='w-full']/div)[2]/div/div/div")
+	private List<WebElement> contractlistdata1;
+	
+	@FindBy(xpath = "//button[.='View Details']")
+	private List<WebElement> viewdetailsbtn;
+	
 	@FindBy(xpath = "//span[@class='text-sm font-medium text-white']/..")
 	private WebElement kpoprofileicon;
 	
@@ -46,6 +58,47 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	@FindBy(xpath = "//span[.='View Dispatch History']")
 	private WebElement viewdispatchhistory;
+	
+	@FindBy(xpath = "//button[.='Initiate Contract']")
+	private WebElement initiatecontractbtn;
+	
+	@FindBy(xpath = "//button[.='Assign']")
+	private WebElement assignbutton;
+	
+	@FindBy(xpath = "//span[@class='ant-select-selection-item']")
+	private WebElement clickkpoexecutivedropdown;
+	
+	@FindBy(xpath = "//input[@type='search']")
+	private WebElement kposearchtextfield;
+	
+	@FindBy(xpath = "(//button[.='Assign'])[2]" )
+	private WebElement assignbtn2;
+	
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[1]")
+	private WebElement clickbuyerdropdown;
+	
+	@FindBy(xpath = "(//input[@type='search'])[1]")
+	private WebElement buyersearchfield;
+	
+	@FindBy(xpath = "(//input[@type='search'])[2]")
+	private WebElement sellersearchfield;
+	
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+	private List<WebElement> buyerdropdownoptions;
+	
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[2]")
+	private WebElement clicksellerdropdown;
+	
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+	private List<WebElement> sellerdropdownoptions;
+	
+	@FindBy(xpath = "//button[.='Send Contract']")
+	private WebElement sendcontractbtn;
+	
+	@FindBy(xpath = "//button[.='Request to Short Close']")
+	private WebElement requesttoshortclosebtn;
+	
+	
 	
 	// add dispatch form
 	
@@ -100,9 +153,143 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 
-	public void contractmanagementupdateaction()
+	public void contractmanagementupdateaction(String email, String pwd, String sidebarfeaturename,
+			String statusname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
+			String contractsellersignoptionname ) throws InterruptedException
 	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
 		
+		// select the left nav bar features by name
+		ClickAction(sidebarfeaturename);
+		
+		clickViewButtonUsingContains(statusname);
+		
+		scrollBottomofPage();
+		
+		waitforElement(initiatecontractbtn);
+		javascriptclick(initiatecontractbtn);
+		
+		waitforElement(clickbuyerdropdown);
+		javascriptclick(clickbuyerdropdown);
+		
+		waitforElement(buyersearchfield);
+		buyersearchfield.sendKeys("sandeep");
+		
+		selectDropdownOption(buyerdropdownoptions, contractbuyersignoptionname);
+		
+		waitforElement(clicksellerdropdown);
+		javascriptclick(clicksellerdropdown);
+		
+		waitforElement(sellersearchfield);
+		sellersearchfield.sendKeys("sandeep");
+		
+		selectDropdownOption(sellerdropdownoptions, contractsellersignoptionname);
+		
+		waitforElement(sendcontractbtn);
+		javascriptclick(sendcontractbtn);
+		
+		
+		
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+		
+	}
+	
+	public void contractmanagementrequesttoshortcloseaction(String email, String pwd, String sidebarfeaturename,
+			String statusname ) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarfeaturename);
+		
+		clickViewButtonUsingContains(statusname);
+		
+		scrollBottomofPage();
+		
+//		waitforElement(requesttoshortclosebtn);
+//		javascriptclick(requesttoshortclosebtn);
+		
+		Thread.sleep(1000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+	}
+	
+	public void contractmanagementassignaction(String email, String pwd, String sidebarfeaturename,
+			String kpoexecutivename) throws InterruptedException, AWTException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarfeaturename);
+		
+		clickViewButtonUsingContains("Pending Release");
+		
+		waitforElement(assignbutton);
+		javascriptclick(assignbutton);
+		
+		waitforElement(clickkpoexecutivedropdown);
+		javascriptclick(clickkpoexecutivedropdown);
+		
+		waitforElement(kposearchtextfield);
+		kposearchtextfield.sendKeys(kpoexecutivename);
+		
+		Actions actions = new Actions(driver);
+		actions.sendKeys(Keys.TAB).perform();
+		
+		waitforElement(assignbtn2);
+		javascriptclick(assignbtn2);
+		
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+	}
+	
+	
+	
+	public void clickViewButtonUsingContains(String statusTextToMatch) throws InterruptedException {
+
+	    boolean found = false;
+
+	    for (int i = 0; i < contractlistdata1.size(); i++) {
+	        
+	    	Thread.sleep(2000);
+	        String statusText = contractlistdata1.get(i).getText().trim();
+	        System.out.println("Row Status: " + statusText);
+
+	        if (statusText.toLowerCase().contains(statusTextToMatch.toLowerCase())) {
+	            
+	            WebElement viewButton = viewdetailsbtn.get(i);
+
+	            // Scroll button into view
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewButton);
+	            Thread.sleep(600);
+
+	            // Click using JS for reliability
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewButton);
+	            
+	            System.out.println("✅ View button clicked for status containing: " + statusTextToMatch);
+	            
+	            found = true;
+	            break;
+	        }
+	    }
+
+	    if (!found) {
+	        System.out.println("❌ No row found with status containing: " + statusTextToMatch);
+	    }
 	}
 	
 	
