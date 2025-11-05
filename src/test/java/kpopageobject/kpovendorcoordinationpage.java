@@ -44,7 +44,7 @@ public class kpovendorcoordinationpage extends kpoBasicpage {
 		
 		for(int i = 0; i < vendorlistdata.size(); i++)
 		{
-			Thread.sleep(2000);
+			Thread.sleep(500);
 			String listdetails = vendorlistdata.get(0).getText();
 			System.out.println("Details : - "+listdetails);
 		}

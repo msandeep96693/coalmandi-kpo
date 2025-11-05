@@ -29,13 +29,32 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	
-	@Test
+	//@Test
 	public void contractmanagementrequestshortcloseaction() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
 		contract.contractmanagementrequesttoshortcloseaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"),prop.getProperty("statusname"));
+				prop.getProperty("sidebarcontractname"),prop.getProperty("statuspendingsignature"));
 	}
+
+	//@Test
+	public void contractmanagementcontinueorderaction() throws InterruptedException
+	{
+		contract = new kpocontractmanagementpage(driver);
+		contract.contractmanagementcontinueorderaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"), prop.getProperty("statuspendingsignature"));
+	}
+	
+	
+	
+	@Test
+	public void contractmanagementkpoverifysignatureaction() throws InterruptedException
+	{
+		contract = new kpocontractmanagementpage(driver);
+		contract.contractmanagementkpoverifysignatureaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"), prop.getProperty("statuspendingsignature"));
+	}
+	
 	
 	//@Test
 	public void kpocontractmanagementassignpage() throws InterruptedException, AWTException

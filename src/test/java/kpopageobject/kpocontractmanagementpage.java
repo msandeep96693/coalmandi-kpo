@@ -98,7 +98,17 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//button[.='Request to Short Close']")
 	private WebElement requesttoshortclosebtn;
 	
+	@FindBy(xpath = "//button[.='Continue Order']")
+	private WebElement continueorderbtn;
 	
+	@FindBy(xpath = "//button[.='Yes']")
+	private WebElement yesbutton;
+	
+	@FindBy(xpath = "//button[.='Verify Signatures']")
+	private WebElement verifysignaturebtn;
+	
+	@FindBy(xpath = "//button[.='Accept']")
+	private WebElement acceptbtn;
 	
 	// add dispatch form
 	
@@ -201,7 +211,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	}
 	
 	public void contractmanagementrequesttoshortcloseaction(String email, String pwd, String sidebarfeaturename,
-			String statusname ) throws InterruptedException
+			String statuspendingsignature ) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
@@ -209,12 +219,12 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// select the left nav bar features by name
 		ClickAction(sidebarfeaturename);
 		
-		clickViewButtonUsingContains(statusname);
+		clickViewButtonUsingContains(statuspendingsignature);
 		
 		scrollBottomofPage();
 		
-//		waitforElement(requesttoshortclosebtn);
-//		javascriptclick(requesttoshortclosebtn);
+		waitforElement(requesttoshortclosebtn);
+		javascriptclick(requesttoshortclosebtn);
 		
 		Thread.sleep(1000);
 		waitforElement(kpoprofileicon);
@@ -222,6 +232,66 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 				
 		waitforElement(kpologoutbutton);
 		javascriptclick(kpologoutbutton);
+	}
+	
+	public void contractmanagementcontinueorderaction(String email, String pwd, String sidebarfeaturename,
+			String statuspendingsignature) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarfeaturename);
+		
+		clickViewButtonUsingContains(statuspendingsignature);
+		
+		scrollBottomofPage();
+		
+		waitforElement(continueorderbtn);
+		javascriptclick(continueorderbtn);
+		
+		waitforElement(yesbutton);
+		javascriptclick(yesbutton);
+		
+		Thread.sleep(1000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+		
+	}
+	
+	
+	
+	
+	public void contractmanagementkpoverifysignatureaction(String email, String pwd, String sidebarfeaturename,
+			String statuspendingsignature) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarfeaturename);
+		
+		clickViewButtonUsingContains(statuspendingsignature);
+		
+		waitforElement(verifysignaturebtn);
+		javascriptclick(verifysignaturebtn);
+
+		waitforElement(acceptbtn);
+		javascriptclick(acceptbtn);
+		
+		Thread.sleep(1000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+		
+		
 	}
 	
 	public void contractmanagementassignaction(String email, String pwd, String sidebarfeaturename,
@@ -256,8 +326,6 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		waitforElement(kpologoutbutton);
 		javascriptclick(kpologoutbutton);
 	}
-	
-	
 	
 	public void clickViewButtonUsingContains(String statusTextToMatch) throws InterruptedException {
 
