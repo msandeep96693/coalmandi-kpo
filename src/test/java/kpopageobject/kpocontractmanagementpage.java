@@ -163,7 +163,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 
-	public void contractmanagementupdateaction(String email, String pwd, String sidebarfeaturename,
+	public void contractmanagementreleasecontractaction(String email, String pwd, String sidebarfeaturename,
 			String statusname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
 			String contractsellersignoptionname ) throws InterruptedException
 	{

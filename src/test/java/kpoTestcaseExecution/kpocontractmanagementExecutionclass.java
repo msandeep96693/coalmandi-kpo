@@ -22,7 +22,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	public void contractmanagementInitiatecontractaction() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
-		contract.contractmanagementupdateaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
+		contract.contractmanagementreleasecontractaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
 				prop.getProperty("sidebarcontractname"),prop.getProperty("statusname"),
 				prop.getProperty("kpoexecutiveoptionname"), prop.getProperty("contractbuyersignoptionname"), 
 				prop.getProperty("contractsellersignoptionname"));
