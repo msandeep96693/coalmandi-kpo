@@ -3,11 +3,13 @@ package kpopageobject;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.xml.xpath.XPath;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -30,8 +32,8 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//span[@title='All Status']")
 	private WebElement allstatusdropdown;
 	
-	@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
-	private List<WebElement> statusdropdownoption;
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+	private List<WebElement> statusdropdownoption; 
 	
 	@FindBy(xpath = "//div[@class='space-y-4']")
 	private List<WebElement> contractlistdata;
@@ -130,6 +132,19 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//button[.='Add Dispatch']")
 	private WebElement adddispatchbutton;
 	
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td/div/span")  
+	private List<WebElement> allStatusnames;
+	
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td") 
+	private List<WebElement> pendingreleasestatus1;
+	
+	@FindBy(xpath = "//span[.='All Status']")
+	private WebElement clickonallstatusdropdown;
+	
+	
+	
+	// //span[.='Pending Release']
+	// //tbody[@class='ant-table-tbody']/tr/td
 	public void contractmanagementlistpage(String email, String pwd, String sidebarfeaturename, 
 			String searchbusinessname, String statusoptionname) throws InterruptedException
 	{
@@ -139,11 +154,12 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// select the left nav bar features by name
 		ClickAction(sidebarfeaturename);
 		
-		waitforElement(searchtextfield);
-		searchtextfield.sendKeys(searchbusinessname);
+//		waitforElement(searchtextfield);
+//		searchtextfield.sendKeys(searchbusinessname);
 		
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
+		
 		
 		selectDropdownOption(statusdropdownoption, statusoptionname);
 		
@@ -163,19 +179,36 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 
-	public void contractmanagementreleasecontractaction(String email, String pwd, String sidebarfeaturename,
-			String statusname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
-			String contractsellersignoptionname ) throws InterruptedException
+	public void contractmanagementInitiatecontractaction(String email, String pwd, String sidebarfeaturename,
+			String statusoptionname, String statusname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
+			String contractsellersignoptionname ) throws InterruptedException, AWTException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+//		ClickAction(sidebarfeaturename);
+		ClickActionexecutive(sidebarfeaturename);
 		
-		clickViewButtonUsingContains(statusname);
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
+		
+		selectDropdownOption(statusdropdownoption, statusoptionname);
+
+		// click on pending release
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		 
+		scrollBottomofPage();
+		
+		// click on pending release 
+		WebElement status2 = allStatusnames.get(1);
+		javascriptclick(status2);
 		
 		scrollBottomofPage();
+		
+		Thread.sleep(2000);
 		
 		waitforElement(initiatecontractbtn);
 		javascriptclick(initiatecontractbtn);
@@ -195,38 +228,51 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		sellersearchfield.sendKeys("sandeep");
 		
 		selectDropdownOption(sellerdropdownoptions, contractsellersignoptionname);
+		Thread.sleep(500);
 		
 		waitforElement(sendcontractbtn);
 		javascriptclick(sendcontractbtn);
-		
-		
+		Thread.sleep(2000);
 		
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
 		waitforElement(kpologoutbutton);
 		javascriptclick(kpologoutbutton);
-		
-		
+			
 	}
 	
 	public void contractmanagementrequesttoshortcloseaction(String email, String pwd, String sidebarfeaturename,
-			String statuspendingsignature ) throws InterruptedException
+			String statusoptionname ) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+//		ClickAction(sidebarfeaturename);
+		ClickActionexecutive(sidebarfeaturename);
+	
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
 		
-		clickViewButtonUsingContains(statuspendingsignature);
+		selectDropdownOption(statusdropdownoption, statusoptionname);
 		
-		scrollBottomofPage();
 		
+		// click on pending signature list
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		
+		WebElement status2 = allStatusnames.get(1);
+		 JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		 js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
+		
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", requesttoshortclosebtn);
 		waitforElement(requesttoshortclosebtn);
 		javascriptclick(requesttoshortclosebtn);
 		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
@@ -243,7 +289,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// select the left nav bar features by name
 		ClickAction(sidebarfeaturename);
 		
-		clickViewButtonUsingContains(statuspendingsignature);
+		//clickViewButtonUsingContains(statuspendingsignature);
 		
 		scrollBottomofPage();
 		
@@ -267,7 +313,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	
 	public void contractmanagementkpoverifysignatureaction(String email, String pwd, String sidebarfeaturename,
-			String statuspendingsignature) throws InterruptedException
+			String statusoptionname) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
@@ -275,15 +321,29 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// select the left nav bar features by name
 		ClickAction(sidebarfeaturename);
 		
-		clickViewButtonUsingContains(statuspendingsignature);
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
 		
+		selectDropdownOption(statusdropdownoption, statusoptionname);
+		
+		// click on pending signature list
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		
+		WebElement status2 = allStatusnames.get(1);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
+		
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", verifysignaturebtn);
 		waitforElement(verifysignaturebtn);
 		javascriptclick(verifysignaturebtn);
 
 		waitforElement(acceptbtn);
 		javascriptclick(acceptbtn);
 		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
@@ -295,7 +355,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	}
 	
 	public void contractmanagementassignaction(String email, String pwd, String sidebarfeaturename,
-			String kpoexecutivename) throws InterruptedException, AWTException
+			String statusoptionname, String kpoexecutivename) throws InterruptedException, AWTException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
@@ -303,7 +363,15 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// select the left nav bar features by name
 		ClickAction(sidebarfeaturename);
 		
-		clickViewButtonUsingContains("Pending Release");
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
+		
+		selectDropdownOption(statusdropdownoption, statusoptionname);
+		
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(1);
+		javascriptclick(status);
+		
 		
 		waitforElement(assignbutton);
 		javascriptclick(assignbutton);
@@ -319,6 +387,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 		waitforElement(assignbtn2);
 		javascriptclick(assignbtn2);
+		Thread.sleep(2000);
 		
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
@@ -327,39 +396,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		javascriptclick(kpologoutbutton);
 	}
 	
-	public void clickViewButtonUsingContains(String statusTextToMatch) throws InterruptedException {
 
-	    boolean found = false;
-
-	    for (int i = 0; i < contractlistdata1.size(); i++) {
-	        
-	    	Thread.sleep(2000);
-	        String statusText = contractlistdata1.get(i).getText().trim();
-	        System.out.println("Row Status: " + statusText);
-
-	        if (statusText.toLowerCase().contains(statusTextToMatch.toLowerCase())) {
-	            
-	            WebElement viewButton = viewdetailsbtn.get(i);
-
-	            // Scroll button into view
-	            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewButton);
-	            Thread.sleep(600);
-
-	            // Click using JS for reliability
-	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewButton);
-	            
-	            System.out.println("✅ View button clicked for status containing: " + statusTextToMatch);
-	            
-	            found = true;
-	            break;
-	        }
-	    }
-
-	    if (!found) {
-	        System.out.println("❌ No row found with status containing: " + statusTextToMatch);
-	    }
-	}
-	
 	
 	public void ClickAction(String btn) {
 	    switch(btn.toLowerCase()) {
@@ -368,6 +405,17 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	        case "contract": javascriptclick(btnsidenavbar.get(2)); break;
 	        case "vendor": javascriptclick(btnsidenavbar.get(3)); break;
 	        case "reports": javascriptclick(btnsidenavbar.get(4)); break;
+
+	        default: throw new NoSuchElementException("Button not found: " + btn);
+	    }
+	}
+	
+	public void ClickActionexecutive(String btn) {
+	    switch(btn.toLowerCase()) {
+	       	case "dashboard": javascriptclick(btnsidenavbar.get(0)); break;
+	        case "contract": javascriptclick(btnsidenavbar.get(1)); break;
+	        case "vendor": javascriptclick(btnsidenavbar.get(2)); break;
+	        case "reports": javascriptclick(btnsidenavbar.get(3)); break;
 
 	        default: throw new NoSuchElementException("Button not found: " + btn);
 	    }

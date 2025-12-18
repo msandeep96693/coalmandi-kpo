@@ -9,7 +9,7 @@ import kpopageobject.kpocontractmanagementpage;
 
 public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	
-	//@Test
+	@Test(priority = 0, enabled = true)
 	public void kpocontractmanagementlistpage() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
@@ -18,18 +18,19 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 				prop.getProperty("Statusoptionname"));
 	}
 	
-	//@Test
-	public void contractmanagementInitiatecontractaction() throws InterruptedException
+	//working
+	@Test(priority = 1, enabled = false )
+	public void contractmanagementInitiatecontractaction() throws InterruptedException, AWTException
 	{
 		contract = new kpocontractmanagementpage(driver);
-		contract.contractmanagementreleasecontractaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"),prop.getProperty("statusname"),
+		contract.contractmanagementInitiatecontractaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"),prop.getProperty("statusoptionname"),prop.getProperty("statusname"),
 				prop.getProperty("kpoexecutiveoptionname"), prop.getProperty("contractbuyersignoptionname"), 
 				prop.getProperty("contractsellersignoptionname"));
 	}
 	
-	
-	//@Test
+	// working
+	@Test(priority = 2, enabled = false)
 	public void contractmanagementrequestshortcloseaction() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
@@ -37,7 +38,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 				prop.getProperty("sidebarcontractname"),prop.getProperty("statuspendingsignature"));
 	}
 
-	//@Test
+	@Test(priority = 3, enabled = false)
 	public void contractmanagementcontinueorderaction() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
@@ -46,8 +47,8 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	
-	
-	@Test
+	// working
+	@Test(priority = 4, enabled = false)
 	public void contractmanagementkpoverifysignatureaction() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
@@ -55,13 +56,13 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 				prop.getProperty("sidebarcontractname"), prop.getProperty("statuspendingsignature"));
 	}
 	
-	
-	//@Test
+	// working
+	@Test(priority = 5, enabled = false)
 	public void kpocontractmanagementassignpage() throws InterruptedException, AWTException
 	{
 		contract = new kpocontractmanagementpage(driver);
 		contract.contractmanagementassignaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"), prop.getProperty("kpoexecutivename"));
+				prop.getProperty("sidebarcontractname"), prop.getProperty("statusoptionname"),  prop.getProperty("kpoexecutivename"));
 	}
 	
 	
