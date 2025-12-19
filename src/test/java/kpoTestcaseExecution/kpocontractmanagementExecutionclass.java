@@ -14,8 +14,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	{
 		contract = new kpocontractmanagementpage(driver);
 		contract.contractmanagementlistpage(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"), prop.getProperty("searchbusinessname"), 
-				prop.getProperty("Statusoptionname"));
+				prop.getProperty("sidebarcontractname"), prop.getProperty("statusoptionname"));
 	}
 	
 	//working
@@ -24,7 +23,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	{
 		contract = new kpocontractmanagementpage(driver);
 		contract.contractmanagementInitiatecontractaction(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"),prop.getProperty("statusoptionname"),prop.getProperty("statusname"),
+				prop.getProperty("sidebarcontractname"),prop.getProperty("statusoptionname"),
 				prop.getProperty("kpoexecutiveoptionname"), prop.getProperty("contractbuyersignoptionname"), 
 				prop.getProperty("contractsellersignoptionname"));
 	}
@@ -38,6 +37,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 				prop.getProperty("sidebarcontractname"),prop.getProperty("statuspendingsignature"));
 	}
 
+	// working
 	@Test(priority = 3, enabled = false)
 	public void contractmanagementcontinueorderaction() throws InterruptedException
 	{

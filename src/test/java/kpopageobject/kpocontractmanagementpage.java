@@ -34,7 +34,8 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 	private List<WebElement> statusdropdownoption; 
-	
+	// //div[@class='ant-select-item ant-select-item-option']/div
+	// //div[@class='ant-select-item-option-content']
 	@FindBy(xpath = "//div[@class='space-y-4']")
 	private List<WebElement> contractlistdata;
 	
@@ -141,18 +142,15 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//span[.='All Status']")
 	private WebElement clickonallstatusdropdown;
 	
-	
-	
-	// //span[.='Pending Release']
-	// //tbody[@class='ant-table-tbody']/tr/td
-	public void contractmanagementlistpage(String email, String pwd, String sidebarfeaturename, 
-			String searchbusinessname, String statusoptionname) throws InterruptedException
+	public void contractmanagementlistpage(String kpoemail, String pwd, String sidebarcontractname, 
+			 String statusoptionname) throws InterruptedException
 	{
+		// String searchbusinessname,
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarcontractname);
 		
 //		waitforElement(searchtextfield);
 //		searchtextfield.sendKeys(searchbusinessname);
@@ -160,17 +158,19 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
 		
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
 		
-		selectDropdownOption(statusdropdownoption, statusoptionname);
+		statusdropdownoption.get(2).click();
 		
-		// Fetch kpo team member
-		for(int i = 0; i < contractlistdata.size(); i++)
-		{
-			Thread.sleep(2000);
-			String listdetails = contractlistdata.get(i).getText();
-			System.out.println("Details : -"+listdetails);
-		}
-				
+		Thread.sleep(1000);
+//		selectDropdownOption(statusdropdownoption, statusoptionname);
+		
+		Thread.sleep(3000);		
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
@@ -179,34 +179,43 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 
-	public void contractmanagementInitiatecontractaction(String email, String pwd, String sidebarfeaturename,
-			String statusoptionname, String statusname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
+	public void contractmanagementInitiatecontractaction(String kpoemail, String pwd, String sidebarcontractname,
+			String statusoptionname, String kpoexecutiveoptionname, String contractbuyersignoptionname,
 			String contractsellersignoptionname ) throws InterruptedException, AWTException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
-//		ClickAction(sidebarfeaturename);
-		ClickActionexecutive(sidebarfeaturename);
+		ClickAction(sidebarcontractname);
+//		ClickActionexecutive(sidebarcontractname);
 		
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
 		
-		selectDropdownOption(statusdropdownoption, statusoptionname);
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+		
+		statusdropdownoption.get(2).click();
+		
+//		selectDropdownOption(statusdropdownoption, statusoptionname);
 
-		// click on pending release
+		// click on pending release in a list 
 		Thread.sleep(2000);
 		WebElement status = allStatusnames.get(0);
 		javascriptclick(status);
 		 
-		scrollBottomofPage();
+		scrollBottomoPage();
 		
-		// click on pending release 
+		// click on pending release in a list
 		WebElement status2 = allStatusnames.get(1);
 		javascriptclick(status2);
 		
-		scrollBottomofPage();
+		scrollBottomoPage();
 		
 		Thread.sleep(2000);
 		
@@ -242,21 +251,29 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 			
 	}
 	
-	public void contractmanagementrequesttoshortcloseaction(String email, String pwd, String sidebarfeaturename,
+	public void contractmanagementrequesttoshortcloseaction(String kpoemail, String pwd, String sidebarcontractname,
 			String statusoptionname ) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
 //		ClickAction(sidebarfeaturename);
-		ClickActionexecutive(sidebarfeaturename);
+		ClickActionexecutive(sidebarcontractname);
 	
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
 		
-		selectDropdownOption(statusdropdownoption, statusoptionname);
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+				
+		statusdropdownoption.get(1).click();
 		
+//		selectDropdownOption(statusdropdownoption, statusoptionname);
 		
 		// click on pending signature list
 		Thread.sleep(2000);
@@ -280,18 +297,41 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		javascriptclick(kpologoutbutton);
 	}
 	
-	public void contractmanagementcontinueorderaction(String email, String pwd, String sidebarfeaturename,
+	public void contractmanagementcontinueorderaction(String kpoemail, String pwd, String sidebarcontractname,
 			String statuspendingsignature) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarcontractname);
 		
-		//clickViewButtonUsingContains(statuspendingsignature);
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
 		
-		scrollBottomofPage();
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+				
+		statusdropdownoption.get(1).click();
+		
+//		selectDropdownOption(statusdropdownoption, statuspendingsignature);
+		
+		// click on pending signature list
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		
+		// update index number based on a status in a list
+		WebElement status2 = allStatusnames.get(0);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
+		
+		scrollBottomoPage();
 		
 		waitforElement(continueorderbtn);
 		javascriptclick(continueorderbtn);
@@ -299,7 +339,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		waitforElement(yesbutton);
 		javascriptclick(yesbutton);
 		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
@@ -309,28 +349,35 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 	
-	
-	
-	
-	public void contractmanagementkpoverifysignatureaction(String email, String pwd, String sidebarfeaturename,
+	public void contractmanagementkpoverifysignatureaction(String kpoemail, String pwd, String sidebarcontractname,
 			String statusoptionname) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarcontractname);
 		
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
 		
-		selectDropdownOption(statusdropdownoption, statusoptionname);
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+				
+		statusdropdownoption.get(1).click();
+		
+//		selectDropdownOption(statusdropdownoption, statusoptionname);
 		
 		// click on pending signature list
 		Thread.sleep(2000);
 		WebElement status = allStatusnames.get(0);
 		javascriptclick(status);
 		
+		// update index number based on a status in a list
 		WebElement status2 = allStatusnames.get(1);
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
@@ -354,19 +401,28 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 	
-	public void contractmanagementassignaction(String email, String pwd, String sidebarfeaturename,
-			String statusoptionname, String kpoexecutivename) throws InterruptedException, AWTException
+	public void contractmanagementassignaction(String kpoemail, String pwd, String sidebarcontractname,
+			String statuspendingrelease, String kpoexecutivename) throws InterruptedException, AWTException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
-		kposign.kposigninpage(email, pwd);
+		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarcontractname);
 		
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
 		
-		selectDropdownOption(statusdropdownoption, statusoptionname);
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+						
+		statusdropdownoption.get(2).click();
+		
+//		selectDropdownOption(statusdropdownoption, statuspendingrelease);
 		
 		Thread.sleep(2000);
 		WebElement status = allStatusnames.get(1);

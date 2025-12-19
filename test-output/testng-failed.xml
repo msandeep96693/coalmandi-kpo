@@ -6,7 +6,7 @@
       <class name="kpoTestcaseExecution.kpocontractmanagementExecutionclass">
         <methods>
           <include name="tear"/>
-          <include name="contractmanagementkpoverifysignatureaction"/>
+          <include name="contractmanagementInitiatecontractaction"/>
           <include name="setup"/>
         </methods>
       </class> <!-- kpoTestcaseExecution.kpocontractmanagementExecutionclass -->

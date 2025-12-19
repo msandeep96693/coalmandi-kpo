@@ -68,7 +68,7 @@ public class kpoBasicpage
 		//element.click();
 	}
 	
-	public void scrollBottomofPage()
+	public void scrollBottomoPage()
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight);");	
@@ -92,15 +92,39 @@ public class kpoBasicpage
 		js.executeScript("arguments[0].click();", element );
 	}
 	
-	public void selectDropdownOption(List<WebElement> dropdownOptions, String optionName) throws InterruptedException {
+//	public void selectDropdownOption(List<WebElement> dropdownOptions, String optionName) throws InterruptedException {
+//	    boolean found = false;
+//
+//	    for (WebElement option : dropdownOptions) {
+//	    	Thread.sleep(1000);
+//	    	System.out.println("option name :- "+ option.getText());
+//	    	
+//	        if (option.getText().equalsIgnoreCase(optionName)) {
+//	           // javascriptclick(option);
+//	        	option.click();
+//	            found = true;
+//	            break;
+//	        }
+//	    }
+//
+//	    if (!found) {
+//	        System.out.println("Option not found: " + optionName);
+//	    }
+//	}
+	
+	public void selectDropdownOption(List<WebElement> dropdownOptions, String optionName)
+	        throws InterruptedException {
+
 	    boolean found = false;
 
-	    for (WebElement option : dropdownOptions) {
-	    	Thread.sleep(2000);
-	    	System.out.println("option name :- "+ option.getText());
-	    	
+	    for (int i = 0; i < dropdownOptions.size(); i++) {   // ✅ index-based loop
+	        WebElement option = dropdownOptions.get(i);
+
+	        Thread.sleep(2000);
+	        System.out.println("option name :- " + option.getText());
+
 	        if (option.getText().equalsIgnoreCase(optionName)) {
-	            javascriptclick(option);
+	            option.click();   // or javascriptclick(option);
 	            found = true;
 	            break;
 	        }
@@ -110,6 +134,7 @@ public class kpoBasicpage
 	        System.out.println("Option not found: " + optionName);
 	    }
 	}
+
 	
 	// --------------------------------------------------------------------------------
 	
