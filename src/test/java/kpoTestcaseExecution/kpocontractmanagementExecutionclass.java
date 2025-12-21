@@ -66,5 +66,14 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	
+		@Test(priority = 6, enabled = false)
+		public void kpoadddispatchfunctionality() throws InterruptedException, AWTException
+		{
+			contract = new kpocontractmanagementpage(driver);
+			contract.kpoadddispatch(prop.getProperty("kpoemail"), prop.getProperty("password"),
+					prop.getProperty("sidebarcontractname"));
+		}
+	
+	
 
 }

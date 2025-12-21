@@ -3,6 +3,8 @@ package kpopageobject;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -53,8 +55,6 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	
 	// contract details xpath
-	@FindBy(xpath = "//button[.='Dispatches']")
-	private WebElement dispatchsection;
 	
 	@FindBy(xpath = "(//button[@type='button'])[2]")
 	private WebElement addnewdispatchbutton;
@@ -141,6 +141,28 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	@FindBy(xpath = "//span[.='All Status']")
 	private WebElement clickonallstatusdropdown;
+	
+	// dispatch 
+	@FindBy(xpath = "//button[.='Dispatches']")
+	private WebElement dispatchsection;
+	
+	@FindBy(xpath = "//span[.='Add New Dispatch']")
+	private WebElement addnewdispatchbtn;
+	
+	@FindBy(xpath = "//input[@placeholder='Enter quantity']")
+	private WebElement enterqtyfield;
+	
+	@FindBy(xpath = "//span[.='Select the dispatch date']")
+	private WebElement clickonselectthedispatchdatefield;
+	
+	@FindBy(xpath = "//input[@placeholder='Enter truck/train number']")
+	private WebElement entertrucktrainnumberfield;
+	
+	@FindBy(xpath = "//input[@type='file']")
+	private WebElement uploadfile;
+	
+	@FindBy(xpath = "//button[.='Add Dispatch']")
+	private WebElement adddispatchbtn;
 	
 	public void contractmanagementlistpage(String kpoemail, String pwd, String sidebarcontractname, 
 			 String statusoptionname) throws InterruptedException
@@ -397,9 +419,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		waitforElement(kpologoutbutton);
 		javascriptclick(kpologoutbutton);
 		
-		
-		
-	}
+		}
 	
 	public void contractmanagementassignaction(String kpoemail, String pwd, String sidebarcontractname,
 			String statuspendingrelease, String kpoexecutivename) throws InterruptedException, AWTException
@@ -452,6 +472,71 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		javascriptclick(kpologoutbutton);
 	}
 	
+	public void kpoadddispatch(String kpoemail, String pwd, 
+			String sidebarcontractname ) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(kpoemail, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarcontractname);
+		
+		waitforElement(allstatusdropdown);
+		allstatusdropdown.click();
+		
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+						
+		statusdropdownoption.get(2).click();
+		
+//		selectDropdownOption(statusdropdownoption, statuspendingrelease);
+		
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(1);
+		javascriptclick(status);
+		
+		waitforElement(dispatchsection);
+		dispatchsection.click();
+		
+		waitforElement(addnewdispatchbtn);
+		addnewdispatchbtn.click();
+		
+		Thread.sleep(25000);  // OTP wait
+		
+		waitforElement(enterqtyfield);
+		enterqtyfield.clear();
+		Thread.sleep(1500);
+		enterqtyfield.sendKeys("22");
+		
+		waitforElement(clickonselectthedispatchdatefield);
+		clickonselectthedispatchdatefield.click();
+		
+		selectDate("21-12-2025");
+		
+		waitforElement(entertrucktrainnumberfield);
+		entertrucktrainnumberfield.sendKeys("kafas34");
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].style.display='block';", uploadfile);
+		uploadfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+		
+		waitforElement(adddispatchbtn);
+		adddispatchbtn.click();
+		
+		Thread.sleep(3000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+	}
+	
+	
 
 	
 	public void ClickAction(String btn) {
@@ -474,6 +559,36 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	        case "reports": javascriptclick(btnsidenavbar.get(3)); break;
 
 	        default: throw new NoSuchElementException("Button not found: " + btn);
+	    }
+	}
+	
+	public void selectDate(String date) {
+	    try {
+	        // Convert dd-MM-yyyy to date object
+	        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
+
+	        // Convert to aria-label format e.g. "4 November 2025"
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        String ariaLabelDate = selectedDate.format(ariaFormat);
+
+	        System.out.println("Selecting date: " + ariaLabelDate);
+
+	        // Click the calendar to open (update locator if needed)
+	        driver.findElement(By.xpath("(//div[@class='relative w-full'])[1]")).click();
+
+	        // ✅ Dynamic XPath based on aria-label
+	        WebElement dateElement = driver.findElement(By.xpath("//abbr[@aria-label='" + ariaLabelDate + "']/.."));
+
+	        // Scroll into view (safe clicking)
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", dateElement);
+	        dateElement.click();
+
+	        System.out.println("✅ Date selected: " + date);
+
+	    } catch (Exception e) {
+	        System.out.println("❌ Failed to select date: " + date);
+	        e.printStackTrace();
 	    }
 	}
 }
