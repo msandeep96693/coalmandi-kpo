@@ -164,6 +164,19 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//button[.='Add Dispatch']")
 	private WebElement adddispatchbtn;
 	
+	// commission
+	
+	@FindBy(xpath = "//button[.='Upload Commission']")
+	private WebElement uploadcommissionbtn;
+	
+	@FindBy(xpath = "//input[@type='file']")
+	private WebElement invoicefileupload;
+	
+	@FindBy(xpath = "//button[.='Upload File']")
+	private WebElement uploadfilebtn;
+	
+	
+	
 	public void contractmanagementlistpage(String kpoemail, String pwd, String sidebarcontractname, 
 			 String statusoptionname) throws InterruptedException
 	{
@@ -482,6 +495,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		ClickAction(sidebarcontractname);
 		
 		waitforElement(allstatusdropdown);
+//		javascriptclick(allstatusdropdown);
 		allstatusdropdown.click();
 		
 		// index  0 - all status
@@ -490,32 +504,45 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// index  3 - In Progress
 		// index  4 - Cancelled
 		// index  5 - Completed
-						
-		statusdropdownoption.get(2).click();
 		
-//		selectDropdownOption(statusdropdownoption, statuspendingrelease);
+		Thread.sleep(1500);
+		statusdropdownoption.get(1).click();
 		
 		Thread.sleep(2000);
-		WebElement status = allStatusnames.get(1);
+		WebElement status = allStatusnames.get(0);
 		javascriptclick(status);
+		
+		// update index number based on a status in a list
+		WebElement status2 = allStatusnames.get(1);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
 		
 		waitforElement(dispatchsection);
 		dispatchsection.click();
 		
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", addnewdispatchbtn);
 		waitforElement(addnewdispatchbtn);
 		addnewdispatchbtn.click();
 		
-		Thread.sleep(25000);  // OTP wait
+		Thread.sleep(15000);  // OTP wait
 		
 		waitforElement(enterqtyfield);
-		enterqtyfield.clear();
+		enterqtyfield.click();
+		enterqtyfield.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(1500);
-		enterqtyfield.sendKeys("22");
+		enterqtyfield.sendKeys("10");
 		
-		waitforElement(clickonselectthedispatchdatefield);
-		clickonselectthedispatchdatefield.click();
+//		waitforElement(clickonselectthedispatchdatefield);
+//		clickonselectthedispatchdatefield.click();
 		
-		selectDate("21-12-2025");
+//		// Click the calendar to open (update locator if needed)
+//	       WebElement clickdate = driver.findElement(By.xpath("//span[.='Select the dispatch date']/.."));
+//	       waitforElement(clickdate);
+//	       javascriptclick(clickdate);
+//			Thread.sleep(2000);
+//		
+//		selectDate("26-12-2025");
 		
 		waitforElement(entertrucktrainnumberfield);
 		entertrucktrainnumberfield.sendKeys("kafas34");
@@ -565,7 +592,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	public void selectDate(String date) {
 	    try {
 	        // Convert dd-MM-yyyy to date object
-	        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
@@ -575,7 +602,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	        System.out.println("Selecting date: " + ariaLabelDate);
 
 	        // Click the calendar to open (update locator if needed)
-	        driver.findElement(By.xpath("(//div[@class='relative w-full'])[1]")).click();
+	        driver.findElement(By.xpath("//span[.='Select the dispatch date']/..")).click();
 
 	        // ✅ Dynamic XPath based on aria-label
 	        WebElement dateElement = driver.findElement(By.xpath("//abbr[@aria-label='" + ariaLabelDate + "']/.."));

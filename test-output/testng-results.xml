@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-12-19T13:00:29 IST" name="Default suite" finished-at="2025-12-19T13:00:44 IST" duration-ms="14900">
+  <suite started-at="2025-12-22T17:55:59 IST" name="Default suite" finished-at="2025-12-22T17:55:59 IST" duration-ms="18">
     <groups>
     </groups>
-    <test started-at="2025-12-19T13:00:29 IST" name="Default test" finished-at="2025-12-19T13:00:44 IST" duration-ms="14900">
-      <class name="kpoTestcaseExecution.kpocontractmanagementExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@44ebcd03]" started-at="2025-12-19T13:00:29 IST" name="setup" finished-at="2025-12-19T13:00:33 IST" duration-ms="4035" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="kpocontractmanagementlistpage()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@44ebcd03]" started-at="2025-12-19T13:00:33 IST" name="kpocontractmanagementlistpage" finished-at="2025-12-19T13:00:44 IST" duration-ms="10706" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- kpocontractmanagementlistpage -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@44ebcd03]" started-at="2025-12-19T13:00:44 IST" name="tear" finished-at="2025-12-19T13:00:44 IST" duration-ms="112" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=kpocontractmanagementlistpage status=SUCCESS method=kpocontractmanagementExecutionclass.kpocontractmanagementlistpage()[pri:0, instance:kpoTestcaseExecution.kpocontractmanagementExecutionclass@44ebcd03] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tear -->
-      </class> <!-- kpoTestcaseExecution.kpocontractmanagementExecutionclass -->
+    <test started-at="2025-12-22T17:55:59 IST" name="Default test" finished-at="2025-12-22T17:55:59 IST" duration-ms="18">
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

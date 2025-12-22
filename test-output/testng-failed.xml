@@ -6,8 +6,8 @@
       <class name="kpoTestcaseExecution.kpocontractmanagementExecutionclass">
         <methods>
           <include name="tear"/>
-          <include name="contractmanagementInitiatecontractaction"/>
           <include name="setup"/>
+          <include name="kpoadddispatchfunctionality"/>
         </methods>
       </class> <!-- kpoTestcaseExecution.kpocontractmanagementExecutionclass -->
     </classes>

@@ -9,7 +9,7 @@ import kpopageobject.kpocontractmanagementpage;
 
 public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	
-	@Test(priority = 0, enabled = true)
+	@Test(priority = 0, enabled = false)
 	public void kpocontractmanagementlistpage() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
@@ -66,7 +66,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	
-		@Test(priority = 6, enabled = false)
+		@Test(priority = 6, enabled = true)
 		public void kpoadddispatchfunctionality() throws InterruptedException, AWTException
 		{
 			contract = new kpocontractmanagementpage(driver);
