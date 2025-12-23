@@ -175,6 +175,13 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//button[.='Upload File']")
 	private WebElement uploadfilebtn;
 	
+	// mark as completed
+	@FindBy(xpath = "//button[.=' Mark as Completed']")
+	private WebElement markascompletedbtn;
+	
+	@FindBy(xpath = "//button[.='Mark as Completed']")
+	private WebElement markascompletedbtn2;
+	
 	
 	
 	public void contractmanagementlistpage(String kpoemail, String pwd, String sidebarcontractname, 
@@ -563,8 +570,114 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		
 	}
 	
+	public void kpouploadcommission(String kpoemail, String pwd, 
+			String sidebarcontractname ) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(kpoemail, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarcontractname);
+		
+		waitforElement(allstatusdropdown);
+//		javascriptclick(allstatusdropdown);
+		allstatusdropdown.click();
+		
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+		
+		Thread.sleep(1500);
+		statusdropdownoption.get(1).click();
+		
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		
+		// update index number based on a status in a list
+		WebElement status2 = allStatusnames.get(1);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
+		
+		waitforElement(dispatchsection);
+		dispatchsection.click();
+		
+		Thread.sleep(1500);
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadcommissionbtn);
+		waitforElement(uploadcommissionbtn);
+		javascriptclick(uploadcommissionbtn);
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].removeAttribute('disabled')", invoicefileupload);
+		js.executeScript("arguments[0].style.display='block';", invoicefileupload);
+		invoicefileupload.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+		
+		waitforElement(uploadfilebtn);
+		javascriptclick(uploadfilebtn);
+		
+		Thread.sleep(3000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+	}
 	
-
+	public void kpomarkascompleted(String kpoemail, String pwd, 
+			String sidebarcontractname ) throws InterruptedException
+	{
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(kpoemail, pwd);
+		
+		// select the left nav bar features by name
+		ClickAction(sidebarcontractname);
+		
+		waitforElement(allstatusdropdown);
+//		javascriptclick(allstatusdropdown);
+		allstatusdropdown.click();
+		
+		// index  0 - all status
+		// index  1 - Pending Signature
+		// index  2 - Pending Release
+		// index  3 - In Progress
+		// index  4 - Cancelled
+		// index  5 - Completed
+		
+		Thread.sleep(1500);
+		statusdropdownoption.get(1).click();
+		
+		Thread.sleep(2000);
+		WebElement status = allStatusnames.get(0);
+		javascriptclick(status);
+		
+		// update index number based on a status in a list
+		WebElement status2 = allStatusnames.get(1);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", status2);
+		javascriptclick(status2);
+		
+		Thread.sleep(1500);
+		// mark as completed button
+		js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", markascompletedbtn);
+		javascriptclick(markascompletedbtn);
+		
+		waitforElement(markascompletedbtn2);
+		javascriptclick(markascompletedbtn2);
+		
+		Thread.sleep(3000);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+				
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
+		
+	}
+	
 	
 	public void ClickAction(String btn) {
 	    switch(btn.toLowerCase()) {

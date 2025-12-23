@@ -66,14 +66,31 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	
-		@Test(priority = 6, enabled = true)
-		public void kpoadddispatchfunctionality() throws InterruptedException, AWTException
-		{
-			contract = new kpocontractmanagementpage(driver);
-			contract.kpoadddispatch(prop.getProperty("kpoemail"), prop.getProperty("password"),
-					prop.getProperty("sidebarcontractname"));
-		}
+	@Test(priority = 6, enabled = false)
+	public void kpoadddispatchfunctionality() throws InterruptedException, AWTException
+	{
+		contract = new kpocontractmanagementpage(driver);
+		contract.kpoadddispatch(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"));
+	}
 	
+	// working
+	@Test(priority = 6, enabled = false)
+	public void kpouploadcommissionfunctionality() throws InterruptedException, AWTException
+	{
+		contract = new kpocontractmanagementpage(driver);
+		contract.kpouploadcommission(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"));
+	}
+	
+	// working
+	@Test(priority = 6, enabled = true)
+	public void kpomarkascompletedfunctionality() throws InterruptedException, AWTException
+	{
+		contract = new kpocontractmanagementpage(driver);
+		contract.kpomarkascompleted(prop.getProperty("kpoemail"), prop.getProperty("password"),
+				prop.getProperty("sidebarcontractname"));
+	}
 	
 
 }
