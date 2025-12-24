@@ -2,6 +2,7 @@ package kpopageobject;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,5 +48,7 @@ public class kposigninpage extends kpoBasicpage {
 		System.out.println("Login confirmation message :- "+ confirmationmsg);
 		
 		Thread.sleep(2000);
+		
+		
 	}
 }

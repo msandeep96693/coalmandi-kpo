@@ -6,56 +6,41 @@ import java.util.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class kpovendorcoordinationpage extends kpoBasicpage {
+public class kpocommissionmanagementpage extends kpoBasicpage {
 
-	public kpovendorcoordinationpage(WebDriver driver) {
+	public kpocommissionmanagementpage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(xpath = "//img[@alt='Coal Mandi']/../following-sibling::nav//button")
 	private List<WebElement> btnsidenavbar;
 	
-	@FindBy(xpath = "//input[@placeholder='Search by business name, contact name']")
-	private WebElement searchtextfield;
-	
-	@FindBy(xpath = "//tr[@class='ant-table-row ant-table-row-level-0']/td")
-    private List<WebElement> vendorlistdata;	
-	
+
 	@FindBy(xpath = "//span[@class='text-sm font-medium text-white']/..")
 	private WebElement kpoprofileicon;
 	
 	@FindBy(xpath = "//button[.='Logout']")
 	private WebElement kpologoutbutton;
 	
-	public void kpovednorcoordinationlistpage(String email, String pwd, String sidebarvendorname, 
-			String vendorsearchbusinessname) throws InterruptedException
+	
+	public void commissionmanagementlist(String email, String pwd, String sidebarcommissionname
+			) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarvendorname);
+		ClickAction(sidebarcommissionname);
 		
-		waitforElement(searchtextfield);
-		searchtextfield.sendKeys(vendorsearchbusinessname);
+		// pending
 		
-		for(int i = 0; i < vendorlistdata.size(); i++)
-		{
-			Thread.sleep(500);
-			String listdetails = vendorlistdata.get(0).getText();
-			System.out.println("Details : - "+listdetails);
-		}
-				
 		Thread.sleep(1500);
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 				
 		waitforElement(kpologoutbutton);
 		javascriptclick(kpologoutbutton);
-		
 	}
 	
 	
@@ -66,10 +51,11 @@ public class kpovendorcoordinationpage extends kpoBasicpage {
 	        case "team": javascriptclick(btnsidenavbar.get(1)); break;
 	        case "contract": javascriptclick(btnsidenavbar.get(2)); break;
 	        case "vendor": javascriptclick(btnsidenavbar.get(3)); break;
-	        case "reports": javascriptclick(btnsidenavbar.get(4)); break;
+	        case "commission": javascriptclick(btnsidenavbar.get(4)); break;
+	        case "reports": javascriptclick(btnsidenavbar.get(5)); break;
 
 	        default: throw new NoSuchElementException("Button not found: " + btn);
 	    }
 	}
-
+	
 }

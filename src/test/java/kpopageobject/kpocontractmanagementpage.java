@@ -31,13 +31,12 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	@FindBy(xpath = "//input[@placeholder='Search by business name']")
 	private WebElement searchtextfield;
 	
-	@FindBy(xpath = "//span[@title='All Status']")
+	@FindBy(xpath = "//span[.='All Status']")
 	private WebElement allstatusdropdown;
 	
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 	private List<WebElement> statusdropdownoption; 
-	// //div[@class='ant-select-item ant-select-item-option']/div
-	// //div[@class='ant-select-item-option-content']
+	
 	@FindBy(xpath = "//div[@class='space-y-4']")
 	private List<WebElement> contractlistdata;
 	
@@ -185,17 +184,22 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 	
 	
 	public void contractmanagementlistpage(String kpoemail, String pwd, String sidebarcontractname, 
-			 String statusoptionname) throws InterruptedException
+			 String statusoptionname, String searchbusinessname) throws InterruptedException
 	{
-		// String searchbusinessname,
+		
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(kpoemail, pwd);
 		
 		// select the left nav bar features by name
 		ClickAction(sidebarcontractname);
 		
-//		waitforElement(searchtextfield);
-//		searchtextfield.sendKeys(searchbusinessname);
+		waitforElement(searchtextfield);
+		searchtextfield.sendKeys(searchbusinessname);
+		
+//		searchtextfield.click();
+//		searchtextfield.sendKeys(Keys.CONTROL, "A");
+//		searchtextfield.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(500);
 		
 		waitforElement(allstatusdropdown);
 		allstatusdropdown.click();
@@ -207,10 +211,7 @@ public class kpocontractmanagementpage extends kpoBasicpage  {
 		// index  4 - Cancelled
 		// index  5 - Completed
 		
-		statusdropdownoption.get(2).click();
-		
-		Thread.sleep(1000);
-//		selectDropdownOption(statusdropdownoption, statusoptionname);
+		javascriptclick(statusdropdownoption.get(2));
 		
 		Thread.sleep(3000);		
 		waitforElement(kpoprofileicon);

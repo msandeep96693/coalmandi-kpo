@@ -35,8 +35,8 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 	@FindBy(xpath = "//span[.='Create Team Member']/..")
 	private WebElement clickoncreateteammemberbtn;
 	
-	@FindBy(xpath = "(//button[.='View Details']/..//button)[2]")
-	private WebElement viewdetailsandellipsesbuttons;
+	@FindBy(xpath = "(//button[@type='button'])[5]")
+	private WebElement ellipsesbuttons;
 	
 	@FindBy(xpath = "(//span[.='Active'])[1]/../preceding-sibling::div")
 	private List<WebElement> teammembernameandID;
@@ -55,7 +55,7 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 	@FindBy(xpath = "//div[@class='ant-notification-notice-message']")
 	private WebElement confirmationsuccessmessage;
 	
-	@FindBy(xpath = "//div[@class='flex items-center gap-3']")
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td/span")
 	private List<WebElement> teammemberlistofdata;
 	
 	@FindBy(xpath = "//span[@class='text-sm font-medium text-white']/..")
@@ -70,38 +70,42 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 	@FindBy(xpath = "//input[@placeholder='Search by name, email']")
 	private WebElement searchtextfield;
 	
-	@FindBy(xpath = "//span[@title='All']")
+	@FindBy(xpath = "(//span[.='Active'])[1]")
 	private WebElement allstatusdropdown;
 	
-	@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 	private List<WebElement> statusoptions;
 	
 	
-	public void kpoteammanagementlistpage(String email, String pwd, String sidebarfeaturename, String searchbyname,
-			String statusname) throws InterruptedException
+	
+	
+	public void kpoteammanagementlistpage(String email, String pwd, String sidebarteamname, String searchbyname
+			) throws InterruptedException
 	{
 		kposigninpage kposign = new kposigninpage(driver);
 		kposign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarteamname);
 		
 		waitforElement(searchtextfield);
 		searchtextfield.sendKeys(searchbyname);
 		
-//		waitforElement(allstatusdropdown);
+		waitforElement(allstatusdropdown);
 //		javascriptclick(allstatusdropdown);
-//		
-//		selectDropdownOption(statusoptions, statusname);
+		allstatusdropdown.click();
+
+		javascriptclick(statusoptions.get(0));
 		
 		// Fetch kpo team member
 		for(int i = 0; i < teammemberlistofdata.size(); i++)
 		{
-			Thread.sleep(2000);
+			Thread.sleep(200);
 			String listdetails = teammemberlistofdata.get(i).getText();
 			System.out.println("Details : -"+listdetails);
 		}
 		
+		Thread.sleep(1500);
 		waitforElement(kpoprofileicon);
 		javascriptclick(kpoprofileicon);
 		
@@ -110,16 +114,13 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 	}
 	
 	
-	
-	
-	
-	public void kpocreateteammanagement(String email, String pwd, String sidebarfeaturename, String fullname, String emailID, String phonenumber) throws InterruptedException
+	public void kpocreateteammanagement(String email, String pwd, String sidebarteamname) throws InterruptedException
 	{  
-		kposigninpage opssign = new kposigninpage(driver);
-		opssign.kposigninpage(email, pwd);
+		kposigninpage kposign = new kposigninpage(driver);
+		kposign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarteamname);
 		Thread.sleep(3000);
 		
 		// click on add team member button
@@ -132,17 +133,17 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 				
 		// enter a full name
 		waitforElement(enterfullnamefield);
-		enterfullnamefield.sendKeys(fullname);
+		enterfullnamefield.sendKeys(setRandomName());
 				
 		// enter a email ID
 		waitforElement(enteremailaddressfield);
-		enteremailaddressfield.sendKeys(emailID);
+		enteremailaddressfield.sendKeys(setRandomEmail());
 				
 		// enter a phone number
 		waitforElement(enterphonenumberfield);
-		enterphonenumberfield.sendKeys(phonenumber);
+		enterphonenumberfield.sendKeys(setRandomMobileNumber());
 		
-		Thread.sleep(3000);
+		Thread.sleep(1500);
 		// click on create team member button
 		waitforElement(clickoncreateteammemberbtn);
 		javascriptclick(clickoncreateteammemberbtn);
@@ -159,21 +160,27 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 			System.out.println("Details : -"+listdetails);
 		}
 		
+		Thread.sleep(1500);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+		
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
 	}
 	
 	
-	public void updateteammember(String email, String pwd, String sidebarfeaturename, String fullname, String phonenumber) throws InterruptedException
+	public void kpoupdateteammember(String email, String pwd, String sidebarteamname) throws InterruptedException
 	{
 		kposigninpage opssign = new kposigninpage(driver);
 		opssign.kposigninpage(email, pwd);
 		
 		// select the left nav bar features by name
-		ClickAction(sidebarfeaturename);
+		ClickAction(sidebarteamname);
 		Thread.sleep(3000);
 		
 		// click on ellipses 
-		waitforElement(viewdetailsandellipsesbuttons);
-		javascriptclick(viewdetailsandellipsesbuttons);
+		waitforElement(ellipsesbuttons);
+		javascriptclick(ellipsesbuttons);
 		
 		// click on edit icon
 		waitforElement(clickonediticon);
@@ -181,17 +188,17 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 		
 		// enter a full name
 		waitforElement(enterfullnamefield);
-		enterfullnamefield.sendKeys(Keys.CONTROL + "a");
+		enterfullnamefield.sendKeys(Keys.CONTROL + "A");
 		enterfullnamefield.sendKeys(Keys.DELETE);
 		Thread.sleep(1500);
-		enterfullnamefield.sendKeys(fullname);
+		enterfullnamefield.sendKeys(setRandomName());
 						
 		// enter a phone number
 		waitforElement(enterphonenumberfield);
-		enterphonenumberfield.sendKeys(Keys.CONTROL + "a");
+		enterphonenumberfield.sendKeys(Keys.CONTROL + "A");
 		enterphonenumberfield.sendKeys(Keys.DELETE);
 		Thread.sleep(1500);
-		enterphonenumberfield.sendKeys(phonenumber);
+		enterphonenumberfield.sendKeys(setRandomMobileNumber());
 		
 		// click on update button
 		waitforElement(updateteammember);
@@ -208,6 +215,13 @@ public class kpocreateteammanagementpage extends kpoBasicpage {
 			String listdetails = teammemberlistofdata.get(0).getText().trim();
 			System.out.println("Details : -"+listdetails);
 		}
+		
+		Thread.sleep(1500);
+		waitforElement(kpoprofileicon);
+		javascriptclick(kpoprofileicon);
+		
+		waitforElement(kpologoutbutton);
+		javascriptclick(kpologoutbutton);
 	}
 	
 	

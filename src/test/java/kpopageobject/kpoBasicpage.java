@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -154,5 +155,41 @@ public class kpoBasicpage
         }
     }
 	
+	
+	public String setRandomBusinessName()
+	   {
+		 String randomstring=RandomStringUtils.random(4,"abcdefghijklmnopqrstuvwxyz");
+		 return "Remember me"+randomstring;
+	   }
+	
+	public String setRandomBusinessNameInternational()
+	   {
+		 String randomstring=RandomStringUtils.random(4,"abcdefghijklmnopqrstuvwxyz");
+		 return "COAL"+randomstring+"PVT ltd";
+	   }
+	
+	 public String setRandomName()
+	   {
+		 String randomstring=RandomStringUtils.random(3,"abcdefghijklmnopqrstuvwxyz");
+		 return "Sandeep"+randomstring;
+	   }
+	 
+	 public String setRandomEmail()
+	   {
+		 String randomstring=RandomStringUtils.random(3,"abcdefghijklmnopqrstuvwxyz");
+		 return "sandeep"+"+opsteam"+randomstring+"@rokkun.io";
+	   }
+	 
+	 public String setRandomMobileNumber()
+	   {
+		  String randomnumeric=RandomStringUtils.randomNumeric(6);
+		  return "9620"+randomnumeric;
+	   }
+	 
+	 public String setRandomnineNumber()
+	   {
+		  String randomnumeric=RandomStringUtils.randomNumeric(5);
+		  return "9620"+randomnumeric;
+	   }
 	
 }

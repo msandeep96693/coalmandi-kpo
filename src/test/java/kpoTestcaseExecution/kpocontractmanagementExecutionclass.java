@@ -9,12 +9,14 @@ import kpopageobject.kpocontractmanagementpage;
 
 public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	
-	@Test(priority = 0, enabled = false)
+	// working
+	@Test(priority = 0, enabled = true)
 	public void kpocontractmanagementlistpage() throws InterruptedException
 	{
 		contract = new kpocontractmanagementpage(driver);
 		contract.contractmanagementlistpage(prop.getProperty("kpoemail"), prop.getProperty("password"),
-				prop.getProperty("sidebarcontractname"), prop.getProperty("statusoptionname"));
+				prop.getProperty("sidebarcontractname"), prop.getProperty("statusoptionname"), 
+				prop.getProperty("searchbusinessname"));
 	}
 	
 	//working
@@ -84,7 +86,7 @@ public class kpocontractmanagementExecutionclass extends kpoBaseclass {
 	}
 	
 	// working
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 6, enabled = false)
 	public void kpomarkascompletedfunctionality() throws InterruptedException, AWTException
 	{
 		contract = new kpocontractmanagementpage(driver);

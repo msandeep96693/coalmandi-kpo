@@ -16,12 +16,14 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import kpopageobject.kpocommissionmanagementpage;
 import kpopageobject.kpocontractmanagementpage;
 import kpopageobject.kpocreateteammanagementpage;
 import kpopageobject.kposigninpage;
@@ -39,6 +41,7 @@ public class kpoBaseclass {
 	public kpocreateteammanagementpage kpoteam;
 	public kpocontractmanagementpage contract;
 	public kpovendorcoordinationpage vendor;
+	public kpocommissionmanagementpage commission;
 	
 	
 	public kpoBaseclass() { 
@@ -61,7 +64,11 @@ public class kpoBaseclass {
 		
 		if(Browsername.equalsIgnoreCase("chrome"))
 		{
-			driver = new ChromeDriver();
+//			driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--window-size=1296,602"); 
+
+			driver = new ChromeDriver(options);
 		} 
 		else if (Browsername.equalsIgnoreCase("firefox"))
 		{

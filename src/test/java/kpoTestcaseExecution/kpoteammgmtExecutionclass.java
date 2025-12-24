@@ -9,32 +9,31 @@ import kpopageobject.kposigninpage;
 public class kpoteammgmtExecutionclass extends kpoBaseclass {
 	
 	
+		//working
 	    @Test(priority = 0, enabled = true)
 	    public void kpoteammanagementlistpage() throws InterruptedException
 	    {
 	    	kpoteam = new kpocreateteammanagementpage(driver);
 	    	kpoteam.kpoteammanagementlistpage(prop.getProperty("kpoemail"), prop.getProperty("password"),
-	    			prop.getProperty("sidebarteamname"), prop.getProperty("searchbyname"), prop.getProperty("statusname"));
+	    			prop.getProperty("sidebarteamname"), prop.getProperty("searchbyname"));
 	    }
 	
-		@Test(priority = 1, enabled = false)
+	    //working
+		@Test(priority = 1, enabled = true)
 		public void kpocreateteammanagement() throws InterruptedException
 		{
 			kpoteam = new kpocreateteammanagementpage(driver);
 			kpoteam.kpocreateteammanagement(prop.getProperty("kpoemail"), prop.getProperty("password"), 
-					prop.getProperty("sidebarteamname"), prop.getProperty("fullname"), 
-					prop.getProperty("emailID"), prop.getProperty("phonenumber"));
-					
+					prop.getProperty("sidebarteamname"));
 		}
 		
-		
-		@Test(priority = 2, enabled = false)
+		//working
+		@Test(priority = 2, enabled = true)
 		public void kpoupdateteammanagement() throws InterruptedException
 		{
 			kpoteam = new kpocreateteammanagementpage(driver);
-			kpoteam.updateteammember(prop.getProperty("kpoemail"), prop.getProperty("password"), 
-					prop.getProperty("sidebarteamname"), prop.getProperty("updatefullname"), 
-					prop.getProperty("updatephonenumber"));
+			kpoteam.kpoupdateteammember(prop.getProperty("kpoemail"), prop.getProperty("password"), 
+					prop.getProperty("sidebarteamname"));
 		}
 
 }

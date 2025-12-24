@@ -7,12 +7,13 @@ import kpopageobject.kpovendorcoordinationpage;
 
 public class kpovendorcoordinationExecutionclass extends kpoBaseclass {
 	
-	@Test
+	//working
+	@Test(priority = 0, enabled = true)
 	public void kpovendorcoordinationlistpage() throws InterruptedException
 	{
 		vendor = new kpovendorcoordinationpage(driver);
 		vendor.kpovednorcoordinationlistpage(prop.getProperty("kpoemail"),prop.getProperty("password"),prop.getProperty("sidebarvendorname"),
-				prop.getProperty("searchbybusinessname"));
+				prop.getProperty("vendorsearchbusinessname"));
 	}
 
 }

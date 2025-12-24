@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="kpoTestcaseExecution.kpocontractmanagementExecutionclass">
+      <class name="kpoTestcaseExecution.kpoteammgmtExecutionclass">
         <methods>
+          <include name="kpocreateteammanagement"/>
           <include name="tear"/>
-          <include name="kpomarkascompletedfunctionality"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- kpoTestcaseExecution.kpocontractmanagementExecutionclass -->
+      </class> <!-- kpoTestcaseExecution.kpoteammgmtExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
