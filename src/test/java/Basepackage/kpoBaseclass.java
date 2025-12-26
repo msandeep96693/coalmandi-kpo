@@ -36,8 +36,8 @@ public class kpoBaseclass {
 	public Properties prop;
 	public WebDriver driver;
 	
-	// ops 
-	public kposigninpage opssign;
+	// KPO
+	public kposigninpage kposign;
 	public kpocreateteammanagementpage kpoteam;
 	public kpocontractmanagementpage contract;
 	public kpovendorcoordinationpage vendor;
